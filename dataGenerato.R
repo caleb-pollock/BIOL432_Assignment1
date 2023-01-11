@@ -19,9 +19,7 @@ Observer <- sample(c("Caleb P","Kennedy R","Louie Y"),100,replace = T)
 Observer
 
 #combines all vectors into one data frame
-measurements <- data.frame(Organism,Limb_Width,Limb_Height,Observer)
-measurements
+measurements <- data.frame(Organism, Limb_Width, Limb_Height, Observer)
 
 #writes the data frame to a CSV file
 write.csv(measurements, "C:\\Users\\Caleb\\Desktop\\Winter 2023 Stats\\measurements.csv",row.names = F)
-View(data)

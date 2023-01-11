@@ -11,5 +11,5 @@ data <- data %>%
 
 #measurements.csv is updated with new column
 write.csv(data, "measurements.csv",row.names = F)
-View(data)
+
 
