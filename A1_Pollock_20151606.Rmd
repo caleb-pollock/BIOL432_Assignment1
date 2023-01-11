@@ -6,6 +6,8 @@ output: html_document
 ---
 The data and code can be found at https://github.com/caleb-pollock/BIOL432_Assignment1
 
+# Introduction
+
 ```{r}
 #here we set all of our libraries and also set the theme to the coulatti theme
 library(dplyr)
@@ -15,17 +17,23 @@ source("http://bit.ly/theme_pub")
 theme_set(theme_pub())
 ```
 
+# Import dataGenerato.R
+
 To begin, we will import our data generator script which will create a data frame sampling 100 species names, limb widths, limb heights, and observers. This will then be output into a csv file known as measurements.csv
 
 ```{r}
 source('dataGenerato.R')
 ```
 
+# Import volumeEstimato.R
+
 Next, we use the csv file generated in the original script to add a new column which calculates the volume from the width and height values generated in the previous script. This includes using dplyrs pipe and mutate functions to add a new column, and we use the volume of a cylinder to calculate the volume of an organisms leg. This will then replace the measurements.csv file to include the new column.
 
 ```{r}
 source('volumeEstimato.R')
 ```
+
+# Import measurements.csv
 
 After executing both of the R scripts, we move onto loading the revised measurements.csv file.
 
@@ -34,6 +42,8 @@ After executing both of the R scripts, we move onto loading the revised measurem
 measurementDat <- read.csv("measurements.csv")
 head(measurementDat)
 ```
+
+# Sort by Organism, Observer, Volume
 
 We will now use dplyr to sort the data by species, than by observer, than by limb volume
 
@@ -44,6 +54,8 @@ measurementDat <- measurementDat %>%
 #you will now be able to see the data grouped by species, then by observer, and finally lowest to highest volume
 head(measurementDat)
 ```
+
+# Average Volume 
  
 Following sorting the dataframe, we will now create a table showing the average volume for each species
 
@@ -55,6 +67,8 @@ measurementTab <- measurementDat %>%
 head(measurementTab)
 ```
 
+# Number of Observations
+
 Following the average volume per species table, we will create a new table which sorts how many times an observer made observations on a particular organism.
 
 ```{r}
@@ -64,6 +78,8 @@ speciesObsTab <- measurementDat %>%
   summarize(Observations = n())
 head(speciesObsTab)
 ```
+
+# Single Box Plot
 
 Next we want to create a single box plot showing showing the distribution of limb volume for each species. This is done through ggplot2, by selecting our data and x and y variables and adding geom_boxplot.
 
@@ -76,6 +92,9 @@ ggplot(measurementDat, aes(x=Organism, y= Volume)) +
        y = "Volume (cm^3)")
                                                       
 ```
+
+# Multi-panel Plot
+
 Finally, to finish the report, we need to generate a multi-panel plot which shows the frequency histograms showing the distribution of limb volume per species. This is preformed by using geom_histogram. 
 
 ```{r}
